@@ -5,7 +5,7 @@ IFS=$'\n\t'
 
 while getopts ":n:" opt; do
   case ${opt} in
-    n) name="${OPTARG}"
+    n) APPLICATION_NAME="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -13,4 +13,8 @@ while getopts ":n:" opt; do
   esac
 done
 
-aws codebuild delete-project --name ${name}
+set -x
+
+ROLE_NAME="CodeBuildServiceRole-${APPLICATION_NAME}"
+
+aws iam delete-role --role-name ${ROLE_NAME}

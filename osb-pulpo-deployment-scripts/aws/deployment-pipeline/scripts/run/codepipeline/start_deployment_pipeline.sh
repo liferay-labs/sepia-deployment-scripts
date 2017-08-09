@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-IFS=$'\n\t'
 
 while getopts ":n:" opt; do
   case ${opt} in
@@ -12,6 +11,8 @@ while getopts ":n:" opt; do
     ;;
   esac
 done
+
+set -x
 
 pipeline_execution_id=`aws codepipeline start-pipeline-execution --name ${application_name}-deployment-pipeline | jq -r .pipelineExecutionId`
 

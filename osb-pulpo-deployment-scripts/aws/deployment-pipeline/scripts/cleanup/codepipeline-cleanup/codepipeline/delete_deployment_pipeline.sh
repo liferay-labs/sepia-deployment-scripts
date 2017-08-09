@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-IFS=$'\n\t'
 
 while getopts ":n:" opt; do
   case ${opt} in
@@ -12,5 +11,7 @@ while getopts ":n:" opt; do
     ;;
   esac
 done
+
+set -x
 
 aws codepipeline delete-pipeline --name ${NAME}-deployment-pipeline

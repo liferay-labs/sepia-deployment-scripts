@@ -5,7 +5,7 @@ IFS=$'\n\t'
 
 while getopts ":n:" opt; do
   case ${opt} in
-    n) NAME="${OPTARG}"
+    n) name="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -13,6 +13,6 @@ while getopts ":n:" opt; do
   esac
 done
 
-./delete_codebuild_project.sh -n ${NAME}-test-dev
-./delete_codebuild_project.sh -n ${NAME}-test-pre
-./delete_codebuild_project.sh -n ${NAME}-test-prod
+set -x
+
+aws codebuild delete-project --name ${name}
