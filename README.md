@@ -1,4 +1,4 @@
-# com-liferay-osb-pulpo-deployment-scripts-private
+# sepia-deployment-scripts
 
 Scripts to setup a continuous deployment pipeline on AWS.
 
