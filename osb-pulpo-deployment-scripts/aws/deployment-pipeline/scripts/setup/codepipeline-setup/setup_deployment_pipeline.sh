@@ -4,11 +4,9 @@ set -euo pipefail
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-PATH_TO_ENV_FILE="${DIR}/setup_deployment_pipeline.env"
-
 while getopts "p:" OPT; do
   case ${OPT} in
-    p) PATH_TO_ENV_FILE="${OPTARG}"
+    p) CONFIG_DIR="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -16,10 +14,10 @@ while getopts "p:" OPT; do
   esac
 done
 
-echo "PATH_TO_ENV_FILE: ${PATH_TO_ENV_FILE}"
+echo "CONFIG_DIR: ${CONFIG_DIR}"
 
 set -o allexport
-source ${PATH_TO_ENV_FILE}
+source ${CONFIG_DIR}/setup_deployment_pipeline.env
 set +o allexport
 
 set -x
