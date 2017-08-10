@@ -2,11 +2,9 @@
 
 set -euo pipefail
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-while getopts "p:" OPT; do
+while getopts "c:" OPT; do
   case ${OPT} in
-    p) CONFIG_DIR="${OPTARG}"
+    c) CONFIG_DIR="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -28,13 +26,14 @@ prereqs/s3/create_bucket.sh \
 prereqs/s3/put_object.sh \
 	-n ${BUCKET_NAME} \
 	-k ${DOCKER_CREDENTIALS_KEY} \
-	-p ${PATH_TO_DOCKER_CREDENTIALS_FILE}
+	-c ${CONFIG_DIR}
 
 prereqs/iam/create_role.sh \
 	-n ${APPLICATION_NAME}
 
 prereqs/iam/put_role_policy.sh \
-	-n ${APPLICATION_NAME}
+	-n ${APPLICATION_NAME} \
+	-c ${CONFIG_DIR}
 
 prereqs/eb/create_eb_environments.sh \
 	-n ${APPLICATION_NAME} \
