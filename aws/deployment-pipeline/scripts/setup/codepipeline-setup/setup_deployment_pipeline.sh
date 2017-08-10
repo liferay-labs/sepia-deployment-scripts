@@ -51,4 +51,5 @@ prereqs/codebuild/create_codebuild_projects.sh \
 	-s ${SERVICE_ROLE_ARN} \
 	-c ${CONFIG_DIR}
 
-codepipeline/create_deployment_pipeline.sh
+codepipeline/create_deployment_pipeline.sh \
+	-c ${CONFIG_DIR}
