@@ -3,8 +3,8 @@
 /aws/eb/.elasticbeanstalk/logs/
 /aws/eb/Dockerrun.aws.json
 /aws/eb/Dockerrun.aws.json-e
-/aws/deployment-pipeline/scripts/setup/codepipeline-setup/prereqs/eb-environments/.elasticbeanstalk/
-/aws/deployment-pipeline/scripts/setup/codepipeline-setup/prereqs/eb-environments/logstash/
-/aws/deployment-pipeline/scripts/setup/codepipeline-setup/prereqs/eb-environments/Dockerrun.aws.json
-/aws/deployment-pipeline/scripts/setup/codepipeline-setup/prereqs/eb-environments/README.md
-/aws/deployment-pipeline/scripts/setup/codepipeline-setup/prereqs/eb/eb_temp/
+/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/eb-environments/.elasticbeanstalk/
+/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/eb-environments/logstash/
+/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/eb-environments/Dockerrun.aws.json
+/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/eb-environments/README.md
+/aws/deployment-pipeline/setup/codepipeline-setup/prereqs/eb/eb_temp/
