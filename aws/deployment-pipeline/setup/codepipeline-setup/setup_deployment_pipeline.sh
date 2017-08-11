@@ -29,7 +29,8 @@ prereqs/s3/put_object.sh \
 	-c ${CONFIG_DIR}
 
 prereqs/iam/create_role.sh \
-	-r ${CODEBUILD_SERVICE_ROLE_NAME}
+	-r ${CODEBUILD_SERVICE_ROLE_NAME} \
+	-c ${CONFIG_DIR}
 
 PATH_TO_CODEBUILD_POLICY_DOCUMENT=${CONFIG_DIR}/prereqs/iam/codebuild-role-policy.json
 
