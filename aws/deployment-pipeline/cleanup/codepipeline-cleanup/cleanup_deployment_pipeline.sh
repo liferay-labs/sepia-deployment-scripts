@@ -31,6 +31,10 @@ prereqs/eb/delete_eb_environments.sh \
 	-n ${APPLICATION_NAME} \
 	-e ${ENVIRONMENT_SUFFIXES}
 
+prereqs/iam/delete_role_policy.sh \
+	-r ${CODEBUILD_SERVICE_ROLE_NAME} \
+	-p ${CODEBUILD_SERVICE_ROLE_POLICY} \
+
 prereqs/iam/delete_role.sh \
 	-n ${APPLICATION_NAME}
 
