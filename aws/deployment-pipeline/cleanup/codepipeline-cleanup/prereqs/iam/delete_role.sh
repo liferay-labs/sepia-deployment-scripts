@@ -17,4 +17,16 @@ set -x
 
 ROLE_NAME="CodeBuildServiceRole-${APPLICATION_NAME}"
 
-aws iam delete-role --role-name ${ROLE_NAME}
+if ( aws iam list-roles |jq -r '.Roles[].RoleName' |grep -q "^${ROLE_NAME}$" ); then
+
+  echo "Role ${ROLE_NAME} exists."
+
+  echo "Deleting role ${ROLE_NAME}."
+
+  aws iam delete-role --role-name ${ROLE_NAME}
+
+else
+
+  echo "Role ${ROLE_NAME} does not exist. Skipping delete-role."
+
+fi
