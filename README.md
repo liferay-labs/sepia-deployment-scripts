@@ -4,7 +4,7 @@ Scripts to setup a continuous deployment pipeline on AWS.
 
 ## Setup a Continous Deployment Pipeline
 ```
-cd osb-pulpo-deployment-scripts/aws/deployment-pipeline/scripts/setup/codepipeline-setup
+cd aws/deployment-pipeline/scripts/setup/codepipeline-setup
 ```
 
 ```
@@ -13,7 +13,7 @@ cd osb-pulpo-deployment-scripts/aws/deployment-pipeline/scripts/setup/codepipeli
 
 ## Cleanup a Continous Deployment Pipeline
 ```
-cd osb-pulpo-deployment-scripts/aws/deployment-pipeline/scripts/cleanup/codepipeline-cleanup
+cd aws/deployment-pipeline/scripts/cleanup/codepipeline-cleanup
 ```
 
 ```
