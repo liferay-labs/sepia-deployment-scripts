@@ -4,7 +4,7 @@ Scripts to setup a continuous deployment pipeline on AWS.
 
 ## Setup a Continous Deployment Pipeline
 ```
-cd aws/deployment-pipeline/scripts/setup/codepipeline-setup
+cd aws/deployment-pipeline/setup/codepipeline-setup
 ```
 
 ```
@@ -13,7 +13,7 @@ cd aws/deployment-pipeline/scripts/setup/codepipeline-setup
 
 ## Cleanup a Continous Deployment Pipeline
 ```
-cd aws/deployment-pipeline/scripts/cleanup/codepipeline-cleanup
+cd aws/deployment-pipeline/cleanup/codepipeline-cleanup
 ```
 
 ```
