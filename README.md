@@ -43,7 +43,7 @@ cd aws/deployment-pipeline/setup/codepipeline-setup
 ## Commit and push the changes made to the deployment repository
 
 
-## Setup a Continous Deployment Pipeline
+## Setup a Continuous Deployment Pipeline
 ```
 cd aws/deployment-pipeline/setup/codepipeline-setup
 ```
@@ -52,7 +52,7 @@ cd aws/deployment-pipeline/setup/codepipeline-setup
 ./setup_deployment_pipeline.sh -c $pulpodir/lexicon-test-portlet/lexicon-test-deployment/aws/deployment-pipeline/config
 ```
 
-## Cleanup a Continous Deployment Pipeline
+## Cleanup a Continuous Deployment Pipeline
 ```
 cd aws/deployment-pipeline/cleanup/codepipeline-cleanup
 ```
