@@ -2,9 +2,11 @@
 
 set -euo pipefail
 
-while getopts ":n:" OPT; do
+while getopts ":n:r:" OPT; do
   case ${OPT} in
     n) BUCKET_NAME="${OPTARG}"
+    ;;
+    r) REGION="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -22,7 +24,7 @@ else
 
   echo "Creating S3 bucket ${BUCKET_NAME}"
 
-  aws s3 mb s3://${BUCKET_NAME}
+  aws s3 mb s3://${BUCKET_NAME} --region ${REGION}
 
 fi
 
