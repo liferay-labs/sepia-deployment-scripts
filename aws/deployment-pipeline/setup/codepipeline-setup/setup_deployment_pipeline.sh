@@ -21,7 +21,8 @@ set +o allexport
 set -x
 
 prereqs/s3/create_bucket.sh \
-	-n ${BUCKET_NAME}
+	-n ${BUCKET_NAME} \
+	-r ${REGION}
 
 prereqs/s3/put_object.sh \
 	-n ${BUCKET_NAME} \
@@ -63,4 +64,5 @@ prereqs/codebuild/create_codebuild_projects.sh \
 	-c ${CONFIG_DIR}
 
 codepipeline/create_deployment_pipeline.sh \
-	-c ${CONFIG_DIR}
+	-c ${CONFIG_DIR} \
+	-r ${REGION}
