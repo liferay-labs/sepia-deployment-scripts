@@ -2,9 +2,11 @@
 
 set -euo pipefail
 
-while getopts ":n:" opt; do
+while getopts ":n:r:" opt; do
   case ${opt} in
     n) APPLICATION_NAME="${OPTARG}"
+    ;;
+    r) REGION="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -14,4 +16,6 @@ done
 
 set -x
 
-aws codepipeline delete-pipeline --name ${APPLICATION_NAME}-deployment-pipeline
+aws codepipeline delete-pipeline \
+	--name ${APPLICATION_NAME}-deployment-pipeline \
+	--region ${REGION}
