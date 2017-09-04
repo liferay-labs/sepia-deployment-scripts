@@ -40,13 +40,16 @@ cd aws/deployment-pipeline/setup/codepipeline-setup
 ./update_deployment_specifications.sh -c $pulpodir/com-liferay-osb-pulpo-engine-assets-private/osb-pulpo-engine-assets-deployment/aws/deployment-pipeline/config
 ```
 
+## Commit and push the changes made to the deployment repository
+
+
 ## Setup a Continous Deployment Pipeline
 ```
 cd aws/deployment-pipeline/setup/codepipeline-setup
 ```
 
 ```
-./setup_deployment_pipeline.sh -c $pulpodir/com-liferay-osb-pulpo-engine-assets-private/osb-pulpo-engine-assets-deployment/aws/deployment-pipeline/config
+./setup_deployment_pipeline.sh -c $pulpodir/lexicon-test-portlet/lexicon-test-deployment/aws/deployment-pipeline/config
 ```
 
 ## Cleanup a Continous Deployment Pipeline
@@ -55,6 +58,6 @@ cd aws/deployment-pipeline/cleanup/codepipeline-cleanup
 ```
 
 ```
-./cleanup_deployment_pipeline.sh -c $pulpodir/com-liferay-osb-pulpo-engine-assets-private/osb-pulpo-engine-assets-deployment/aws/deployment-pipeline/config
+./cleanup_deployment_pipeline.sh -c $pulpodir/lexicon-test-portlet/lexicon-test-deployment/aws/deployment-pipeline/config
 ```
 
