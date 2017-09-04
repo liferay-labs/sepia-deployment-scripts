@@ -34,6 +34,7 @@ else
 	--source type="CODEPIPELINE" \
 	--artifacts type="CODEPIPELINE" \
 	--environment file://${CONFIG_DIR}/prereqs/codebuild/codebuild-project-test-environment-${ENVIRONMENT_SUFFIX}.json \
-	--service-role ${SERVICE_ROLE_ARN}
+	--service-role ${SERVICE_ROLE_ARN} \
+	--region ${REGION}
 
 fi
