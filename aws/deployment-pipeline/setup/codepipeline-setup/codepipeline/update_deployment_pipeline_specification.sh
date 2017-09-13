@@ -32,7 +32,7 @@ jq '.pipeline.stages[0].actions[0].configuration.Repo = "'${DEPLOYMENT_ARTIFACTS
 
 jq '.pipeline.stages[0].actions[0].configuration.Branch = "'${DEPLOYMENT_ARTIFACTS_BRANCH}'"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
 
-jq '.pipeline.stages[0].actions[0].configuration.OAuthToken = "'${GITHUB_OAUTH_TOKEN}'"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
+jq '.pipeline.stages[0].actions[0].configuration.OAuthToken = "'${GITHUB_TOKEN}'"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
 
 # Configure get-test-source
 
@@ -42,7 +42,7 @@ jq '.pipeline.stages[0].actions[1].configuration.Repo = "'${TEST_REPO}'"' ${PATH
 
 jq '.pipeline.stages[0].actions[1].configuration.Branch = "'${TEST_BRANCH}'"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
 
-jq '.pipeline.stages[0].actions[1].configuration.OAuthToken = "'${GITHUB_OAUTH_TOKEN}'"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
+jq '.pipeline.stages[0].actions[1].configuration.OAuthToken = "'${GITHUB_TOKEN}'"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
 
 
 # Configure deploy-to-dev
