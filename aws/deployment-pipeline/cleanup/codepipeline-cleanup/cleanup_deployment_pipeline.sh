@@ -21,7 +21,8 @@ set +o allexport
 set -x
 
 codepipeline/delete_deployment_pipeline.sh \
-	-n ${APPLICATION_NAME}
+	-n ${APPLICATION_NAME} \
+	-r ${REGION}
 
 prereqs/codebuild/delete_codebuild_projects.sh \
 	-n ${APPLICATION_NAME} \
