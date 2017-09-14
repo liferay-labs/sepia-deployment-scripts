@@ -2,11 +2,13 @@
 
 set -euo pipefail
 
-while getopts ":n:e:" opt; do
+while getopts ":n:e:r:" opt; do
   case ${opt} in
     n) APPLICATION_NAME="${OPTARG}"
     ;;
     e) ENVIRONMENT_SUFFIXES="${OPTARG}"
+    ;;
+    r) REGION="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
