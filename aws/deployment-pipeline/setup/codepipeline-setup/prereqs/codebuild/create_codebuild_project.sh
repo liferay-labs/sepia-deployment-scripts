@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-while getopts ":n:e:s:c:" opt; do
+while getopts ":n:e:s:c:r:" opt; do
   case ${opt} in
     n) APPLICATION_NAME="${OPTARG}"
     ;;
@@ -11,6 +11,8 @@ while getopts ":n:e:s:c:" opt; do
     s) SERVICE_ROLE_ARN="${OPTARG}"
     ;;
     c) CONFIG_DIR="${OPTARG}"
+    ;;
+    r) REGION="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -22,7 +24,7 @@ set -x
 
 CODEBUILD_PROJECT_NAME=${APPLICATION_NAME}-test-${ENVIRONMENT_SUFFIX}
 
-if (aws codebuild list-projects | jq -r '.projects[]' | grep -q "^${CODEBUILD_PROJECT_NAME}$"); then
+if (aws codebuild list-projects --region ${REGION} | jq -r '.projects[]' | grep -q "^${CODEBUILD_PROJECT_NAME}$"); then
 
   echo "CodeBuild project ${CODEBUILD_PROJECT_NAME} already exists"
 
