@@ -26,7 +26,8 @@ codepipeline/delete_deployment_pipeline.sh \
 
 prereqs/codebuild/delete_codebuild_projects.sh \
 	-n ${APPLICATION_NAME} \
-	-e ${ENVIRONMENT_SUFFIXES}
+	-e ${ENVIRONMENT_SUFFIXES} \
+	-r ${REGION}
 
 prereqs/eb/delete_eb_environments.sh \
 	-n ${APPLICATION_NAME} \
