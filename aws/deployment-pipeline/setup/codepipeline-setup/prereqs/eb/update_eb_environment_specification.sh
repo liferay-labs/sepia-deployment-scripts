@@ -34,3 +34,7 @@ jq '.containerDefinitions[0].image = "'${DOCKER_ORG}'/'${DOCKER_IMAGE_NAME}':'${
 
 jq '.containerDefinitions[0].name = "'${APPLICATION_NAME}'"' ${PATH_TO_EB_DOCKER_JSON_FILE}|sponge ${PATH_TO_EB_DOCKER_JSON_FILE}
 
+
+# Configure global application name
+
+cat ${PATH_TO_EB_DOCKER_JSON_FILE}/../.elasticbeanstalk/config.yml | docker run -i --rm jlordiales/jyparser set ".global.application_name" \"${APPLICATION_NAME}\"

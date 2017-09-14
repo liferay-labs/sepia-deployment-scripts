@@ -40,6 +40,10 @@ DEPLOYMENT_REPO_DIR=${TRAVIS_BUILD_DIR}/../${DEPLOYMENT_ARTIFACTS_REPO}
 
 cd ${DEPLOYMENT_REPO_DIR}
 
+# Configure global application name
+
+cat ${DEPLOYMENT_REPO_DIR}/.elasticbeanstalk/config.yml | docker run -i --rm jlordiales/jyparser set ".global.application_name" \"${APPLICATION_NAME}\"
+
 # Update docker image version. Commit and push change.
 
 jq '.containerDefinitions[0].image = "'${DOCKER_ORG}'/'${DOCKER_IMAGE_NAME}':'${DOCKER_IMAGE_VERSION}'"' ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json|sponge ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
