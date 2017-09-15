@@ -46,7 +46,7 @@ cat ${DEPLOYMENT_REPO_DIR}/.elasticbeanstalk/config.yml | docker run -i --rm jlo
 
 # Update docker image version. Commit and push change.
 
-jq '.containerDefinitions[0].image = "'${DOCKER_ORG}'/'${DOCKER_IMAGE_NAME}':'${DOCKER_IMAGE_VERSION}'"' ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json|sponge ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
+jq --join-output --tab '.containerDefinitions[0].image = "'${DOCKER_ORG}'/'${DOCKER_IMAGE_NAME}':'${DOCKER_IMAGE_VERSION}'"' ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json|sponge ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
 
 git add ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
 
