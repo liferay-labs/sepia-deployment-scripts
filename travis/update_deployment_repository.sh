@@ -62,9 +62,11 @@ jq '.containerDefinitions[0].name = "'${APPLICATION_NAME}'"' ${PATH_TO_EB_DOCKER
 
 ## Update .elasticbeanstalk/config.yml
 
+PATH_TO_CONFIG_YML_FILE=${DEPLOYMENT_REPO_DIR}/.elasticbeanstalk/config.yml
+
 # Configure global application name
 
-cat ${DEPLOYMENT_REPO_DIR}/.elasticbeanstalk/config.yml | docker run -i --rm jlordiales/jyparser set ".global.application_name" \"${APPLICATION_NAME}\"
+cat ${PATH_TO_CONFIG_YML_FILE} | docker run -i --rm jlordiales/jyparser set ".global.application_name" \"${APPLICATION_NAME}\"|sponge ${PATH_TO_CONFIG_YML_FILE}
 
 
 # Add changed files
