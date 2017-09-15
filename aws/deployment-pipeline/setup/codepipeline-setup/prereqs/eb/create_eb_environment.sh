@@ -4,14 +4,6 @@ set -euo pipefail
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-function cleanup {
-  echo "Cleanup create_eb_environment temp files"
-  rm -r ${EB_TEMP_DIR} || true
-  rm ${DIR}/deployment-artifacts.zip || true
-  rmdir ${DIR}/${DEPLOYMENT_ARTIFACTS_REPO}-${DEPLOYMENT_ARTIFACTS_BRANCH} || true
-}
-trap cleanup EXIT
-
 while getopts ":n:e:d:i:g:c:" opt; do
   case ${opt} in
     n) APPLICATION_NAME="${OPTARG}"
