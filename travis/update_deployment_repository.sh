@@ -77,7 +77,7 @@ cd ${DEPLOYMENT_REPO_DIR}
 
 # Update docker image version. Commit and push change.
 
-jq '.containerDefinitions[0].image = "liferay/'${DOCKER_IMAGE_NAME}':'${DOCKER_IMAGE_VERSION}'"' ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json|sponge ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
+jq --join-output --tab '.containerDefinitions[0].image = "liferay/'${DOCKER_IMAGE_NAME}':'${DOCKER_IMAGE_VERSION}'"' ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json|sponge ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
 
 git add ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
 
