@@ -18,7 +18,14 @@ done
 
 PIPELINE_NAME=${APPLICATION_NAME}-deployment-pipeline
 
+set +o pipefail
+
 aws codepipeline list-pipelines --region ${REGION} |jq -r '.pipelines[].name' |grep -q "^${PIPELINE_NAME}$"
+
+
+
+
+set -o pipefail
 
 if [ $? -eq 0 ]; then
   echo "Codepipeline ${PIPELINE_NAME} exists"
