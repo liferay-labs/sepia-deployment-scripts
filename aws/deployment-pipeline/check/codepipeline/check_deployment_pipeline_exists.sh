@@ -18,17 +18,12 @@ done
 
 PIPELINE_NAME=${APPLICATION_NAME}-deployment-pipeline
 
-set +o pipefail
+LIST_PIPELINE_OUTPUT=`aws codepipeline list-pipelines --region ${REGION} |jq -r '.pipelines[].name' |{ grep "^${PIPELINE_NAME}$" || true; }`
 
-aws codepipeline list-pipelines --region ${REGION} |jq -r '.pipelines[].name' |grep -q "^${PIPELINE_NAME}$"
-
-
-
-
-set -o pipefail
-
-if [ $? -eq 0 ]; then
-  echo "Codepipeline ${PIPELINE_NAME} exists"
+if [ ! -z "$LIST_PIPELINE_OUTPUT" ]; then
+  echo "Codepipeline ${PIPELINE_NAME} exists in region ${REGION}"
   echo "Creating file ${PIPELINE_EXISTS_FILE}"
   touch ${PIPELINE_EXISTS_FILE}
+else
+  echo "Codepipeline ${PIPELINE_NAME} does not exist in region ${REGION}"
 fi
