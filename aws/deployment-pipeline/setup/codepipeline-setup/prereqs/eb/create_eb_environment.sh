@@ -30,7 +30,7 @@ CNAME="${APPLICATION_NAME}-${ENVIRONMENT_SUFFIX}"
 
 echo "Make sure cname is available: ${CNAME}"
 
-${DIR}/wait_until_cname_is_available.sh -c ${CNAME}
+${DIR}/wait_until_cname_is_available.sh -g ${REGION} -c ${CNAME}
 
 echo "Read environment variables for environment"
 

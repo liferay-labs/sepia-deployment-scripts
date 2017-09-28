@@ -2,9 +2,11 @@
 
 set -euo pipefail
 
-while getopts ":c:" opt; do
+while getopts ":c:g:" opt; do
   case ${opt} in
     c) CNAME="${OPTARG}"
+    ;;
+    g) REGION="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -18,7 +20,7 @@ SLEEP_SECONDS=30
 TRY_NUMBER=1
 echo "Checking up to ${MAX_TRIES} times every ${SLEEP_SECONDS} for ${CNAME} to be available"
 
-while [ `aws elasticbeanstalk check-dns-availability --cname-prefix ${CNAME} | jq -r '.Available'` == "false" ]; do
+while [ `aws elasticbeanstalk check-dns-availability --region ${REGION} --cname-prefix ${CNAME} | jq -r '.Available'` == "false" ]; do
 
   echo "Try number $TRY_NUMBER. Cname ${CNAME} is currently not available. Checking again in ${SLEEP_SECONDS} seconds"
 
