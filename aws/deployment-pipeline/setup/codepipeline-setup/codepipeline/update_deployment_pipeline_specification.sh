@@ -68,6 +68,19 @@ jq '.pipeline.stages[3].actions[0].configuration.EnvironmentName = "'${APPLICATI
 
 jq '.pipeline.stages[4].actions[0].configuration.ProjectName = "'${APPLICATION_NAME}'-test-pre"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
 
+
+# Configure deploy-to-prod
+
+jq '.pipeline.stages[6].actions[0].configuration.ApplicationName = "'${APPLICATION_NAME}'"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
+
+jq '.pipeline.stages[6].actions[0].configuration.EnvironmentName = "'${APPLICATION_NAME}'-prod"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
+
+
+# Configure test-prod
+
+jq '.pipeline.stages[7].actions[0].configuration.ProjectName = "'${APPLICATION_NAME}'-test-prod"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
+
+
 # Configure artifactStore
 
 jq '.pipeline.artifactStore.location = "codepipeline-'${APPLICATION_NAME}'"' ${PATH_TO_PIPELINE_JSON_FILE}|sponge ${PATH_TO_PIPELINE_JSON_FILE}
