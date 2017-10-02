@@ -35,11 +35,18 @@ prereqs/eb/delete_eb_environments.sh \
 	-r ${REGION}
 
 prereqs/iam/delete_role_policy.sh \
+	-r ${CODEPIPELINE_SERVICE_ROLE_NAME} \
+	-p ${CODEPIPELINE_SERVICE_ROLE_POLICY}
+
+prereqs/iam/delete_role_policy.sh \
 	-r ${CODEBUILD_SERVICE_ROLE_NAME} \
-	-p ${CODEBUILD_SERVICE_ROLE_POLICY} \
+	-p ${CODEBUILD_SERVICE_ROLE_POLICY}
 
 prereqs/iam/delete_role.sh \
-	-n ${APPLICATION_NAME}
+	-r ${CODEBUILD_SERVICE_ROLE_NAME}
+
+prereqs/iam/delete_role.sh \
+	-r ${CODEPIPELINE_SERVICE_ROLE_NAME}
 
 prereqs/s3/delete_bucket.sh \
 	-n ${BUCKET_NAME}
