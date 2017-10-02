@@ -20,15 +20,17 @@ Fork these sample repositories:
 Then, add your forked liferay-game repository to your Travis account and make 
 sure you set the following environment variables (keep them not visible):
 
-| Variable              | Definition                                                                   |
-|-----------------------|------------------------------------------------------------------------------|
-| AWS_ACCOUNT_ID        | The ACCOUNT ID of your AWS account                                           |
-| AWS_ACCESS_KEY_ID     | Your AWS ACCESS KEY ID                                                       |
-| AWS_SECRET_ACCESS_KEY | Your AWS SECRET ACCESS KEY                                                   |
-| DOCKER_ORG            | Your public organization in Dockerhub                                        |
-| DOCKER_USER           | Your Dockerhub user                                                          |
-| DOCKER_PWD            | Your Dockerhub password                                                      |
-| GITHUB_TOKEN          | The Github token of your previously forked liferay-game-deployment repository|
+| Variable              | Definition                                                  |
+|-----------------------|-------------------------------------------------------------|
+| AWS_ACCOUNT_ID        | The ACCOUNT ID of your AWS account                          |
+| AWS_ACCESS_KEY_ID     | Your AWS ACCESS KEY ID                                      |
+| AWS_SECRET_ACCESS_KEY | Your AWS SECRET ACCESS KEY                                  |
+| DOCKER_ORG            | Your public organization in Dockerhub                       |
+| DOCKER_USER           | Your Dockerhub user                                         |
+| DOCKER_PWD            | Your Dockerhub password                                     |
+| DOCKER_AUTH_TOKEN     | Your Docker Auth Token                                      |
+| GITHUB_TOKEN          | The Github token of your liferay-game-deployment repository |
+| GITHUB_USER           | The Github user of your liferay-game-deployment repository  |
 
 ## Creating and updating the pipeline
 
