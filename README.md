@@ -34,6 +34,21 @@ sure you set the following environment variables (keep them not visible):
 
 To obtain the value for DOCKER_AUTH_TOKEN follow the steps described in [Using Images from a Private Repository](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker.container.console.html#docker-images-private).
 The value you need to enter is referred on that link as `auth_token`.
+If you are running Docker on MAC, in order to get the right value of the token make sure you have configure Docker NOT to store docker logins in macOS keychain.
+To do so, got to Docker > Preferences and uncheck the option "Securely store docker logins in macOS keychain".
+On a terminal execute:
+`docker logout`
+`docker login -u<DOCKER_USER> -p<DOCKER_PWD>`
+The value of the DOCKER_AUTH_TOKEN can be extracted from ~/.docker/config.json
+```
+{
+  "auths" : {
+    "https://index.docker.io/v1/" : {
+      "auth" : "auth_token"
+    }
+  }
+}
+```
 
 To obtain the value for `GIHUB_TOKEN` follow these steps: [Creating a token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/#creating-a-token).
 
