@@ -40,6 +40,8 @@ On a terminal execute:
 
 ```
 docker logout
+```
+```
 docker login -u<DOCKER_USER> -p<DOCKER_PWD>
 ```
 
