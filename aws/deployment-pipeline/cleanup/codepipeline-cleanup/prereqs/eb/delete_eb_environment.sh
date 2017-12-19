@@ -28,8 +28,7 @@ if (aws elasticbeanstalk describe-environments --application-name ${APPLICATION_
   echo "Deleting EB environment ${ENVIRONMENT_NAME}"
 
   aws elasticbeanstalk terminate-environment \
-	--environment-name ${ENVIRONMENT_NAME} \
-	--region ${REGION}
+	--environment-name ${ENVIRONMENT_NAME}
 
 else
 
