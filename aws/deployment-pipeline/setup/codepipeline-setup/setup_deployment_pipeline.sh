@@ -20,13 +20,6 @@ set +o allexport
 
 set -x
 
-prereqs/dockerhub/create_dockerhub_repository.sh \
-	-o ${DOCKER_ORG} \
-	-u ${DOCKER_USER} \
-	-p ${DOCKER_PWD} \
-	-i ${DOCKER_IMAGE_NAME} \
-	-r ${DOCKER_IS_PRIVATE}
-
 prereqs/s3/create_bucket.sh \
 	-n ${BUCKET_NAME} \
 	-r ${REGION}
