@@ -26,10 +26,6 @@ done
 
 set -x
 
-CNAME="${APPLICATION_NAME}-${ENVIRONMENT_SUFFIX}"
-
-bash ./wait_until_cname_is_available.sh -c ${CNAME}
-
 echo "Read environment variables for environment"
 
 EB_ENV_VARS=`cat ${CONFIG_DIR}/prereqs/eb/env-vars/env-vars-${ENVIRONMENT_SUFFIX}.cfg`
@@ -40,15 +36,11 @@ PREVIOUS_DIR=$(pwd)
 
 cd ${PATH_TO_DEPLOYMENT_ARTIFACTS_REPO}
 
-echo "Make sure cname is available: ${CNAME}"
-
-${DIR}/wait_until_cname_is_available.sh -c ${CNAME}
-
 echo "Create eb environment from directory: ${PATH_TO_DEPLOYMENT_ARTIFACTS_REPO}"
 
 eb create \
 	--instance_type ${INSTANCE_TYPE} \
-	--cname ${CNAME} \
+	--cname ${APPLICATION_NAME}-${ENVIRONMENT_SUFFIX} \
 	--envvars "${EB_ENV_VARS}" \
 	--region ${REGION} \
 	${APPLICATION_NAME}-${ENVIRONMENT_SUFFIX} \
