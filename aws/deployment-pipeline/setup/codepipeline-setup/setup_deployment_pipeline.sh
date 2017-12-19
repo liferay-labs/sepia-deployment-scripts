@@ -67,5 +67,3 @@ prereqs/codebuild/create_codebuild_projects.sh \
 codepipeline/create_deployment_pipeline.sh \
 	-c ${CONFIG_DIR} \
 	-r ${REGION}
-
-echo "Setup Deployment Pipeline Completed!"

@@ -43,5 +43,3 @@ prereqs/iam/delete_role.sh \
 
 prereqs/s3/delete_bucket.sh \
 	-n ${BUCKET_NAME}
-
-echo "Cleanup Deployment Pipeline Completed!"
