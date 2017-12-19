@@ -64,7 +64,7 @@ mv ${DEPLOYMENT_ARTIFACTS_REPO}-${DEPLOYMENT_ARTIFACTS_BRANCH}/* ${EB_TEMP_DIR}
 rmdir ${DEPLOYMENT_ARTIFACTS_REPO}-${DEPLOYMENT_ARTIFACTS_BRANCH}
 
 
-echo "Update EB Environment specifications"
+echo "Update EB Environment specifcation"
 
 PATH_TO_EB_DOCKER_JSON_FILE=${EB_TEMP_DIR}/Dockerrun.aws.json
 
