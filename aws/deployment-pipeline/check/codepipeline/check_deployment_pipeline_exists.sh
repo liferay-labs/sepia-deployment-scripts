@@ -16,10 +16,23 @@ done
 
 PIPELINE_NAME=${APPLICATION_NAME}-deployment-pipeline
 
-aws codepipeline list-pipelines |jq -r '.pipelines[].name' |grep -q "^${PIPELINE_NAME}$"
+(
+	aws codepipeline get-pipeline --name ${PIPELINE_NAME}
+)
 
-if [ $? -eq 0 ]; then
+if [ $? = 255 ]
+then
+  echo "Codepipeline ${PIPELINE_NAME} does not exist"
+  exit 0
+fi
+
+if [ $? = 0 ]
+then
   echo "Codepipeline ${PIPELINE_NAME} exists"
   echo "Creating file ${PIPELINE_EXISTS_FILE}"
   touch ${PIPELINE_EXISTS_FILE}
+  exit 0
 fi
+
+echo "Could not determine if codepipeline ${PIPELINE_NAME} exists"
+exit 1
