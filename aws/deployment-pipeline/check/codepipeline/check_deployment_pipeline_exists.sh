@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -l
+
+# Make bash act as if it had been invoked as a login shell
+# This allows the calling shell to view the value of the environment variables
+# set within this script
 
 set -euo pipefail
 
