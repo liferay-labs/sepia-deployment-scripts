@@ -1,23 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
-while getopts "c:" OPT; do
-  case ${OPT} in
-    c) CONFIG_DIR="${OPTARG}"
-    ;;
-    \?) echo "Invalid option -${OPTARG}" >&2
-    exit 1
-    ;;
-  esac
-done
-
-echo "CONFIG_DIR: ${CONFIG_DIR}"
-
-set -o allexport
-source ${CONFIG_DIR}/setup_deployment_pipeline.env
-set +o allexport
-
 printf "Values used: \n"
 printf "COMMIT_MESSAGE_PREFIX: %s\n" "${COMMIT_MESSAGE_PREFIX}"
 printf "DEPLOYMENT_ARTIFACTS_BRANCH: %s\n" "${DEPLOYMENT_ARTIFACTS_BRANCH}"
