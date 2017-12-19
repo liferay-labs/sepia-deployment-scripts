@@ -31,8 +31,7 @@ prereqs/codebuild/delete_codebuild_projects.sh \
 
 prereqs/eb/delete_eb_environments.sh \
 	-n ${APPLICATION_NAME} \
-	-e ${ENVIRONMENT_SUFFIXES} \
-	-r ${REGION}
+	-e ${ENVIRONMENT_SUFFIXES}
 
 prereqs/iam/delete_role_policy.sh \
 	-r ${CODEBUILD_SERVICE_ROLE_NAME} \
