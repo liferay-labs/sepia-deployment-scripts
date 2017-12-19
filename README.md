@@ -37,15 +37,8 @@ The value you need to enter is referred on that link as `auth_token`.
 If you are running Docker on MAC, in order to get the right value of the token make sure you have configure Docker NOT to store docker logins in macOS keychain.
 To do so, got to Docker > Preferences and uncheck the option "Securely store docker logins in macOS keychain".
 On a terminal execute:
-
-```
-docker logout
-```
-
-```
-docker login -u<DOCKER_USER> -p<DOCKER_PWD>
-```
-
+`docker logout`
+`docker login -u<DOCKER_USER> -p<DOCKER_PWD>`
 The value of the DOCKER_AUTH_TOKEN can be extracted from ~/.docker/config.json
 ```
 {
