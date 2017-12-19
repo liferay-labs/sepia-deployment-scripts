@@ -3,9 +3,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-while getopts ":r:" opt; do
+while getopts ":n:" opt; do
   case ${opt} in
-    r) ROLE_NAME="${OPTARG}"
+    n) APPLICATION_NAME="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -14,6 +14,8 @@ while getopts ":r:" opt; do
 done
 
 set -x
+
+ROLE_NAME="CodeBuildServiceRole-${APPLICATION_NAME}"
 
 if ( aws iam list-roles |jq -r '.Roles[].RoleName' |grep -q "^${ROLE_NAME}$" ); then
 
