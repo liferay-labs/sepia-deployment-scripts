@@ -31,7 +31,6 @@ printf "\n"
 # Echo commands with expanded variables
 set -x
 
-
 # Clone deployment repository
 cd ${TRAVIS_BUILD_DIR}/..
 
@@ -39,46 +38,18 @@ git clone --depth=5 --branch=${DEPLOYMENT_ARTIFACTS_BRANCH} https://${GITHUB_USE
 
 DEPLOYMENT_REPO_DIR=${TRAVIS_BUILD_DIR}/../${DEPLOYMENT_ARTIFACTS_REPO}
 
-## Update Dockerrun.aws.json
-
-PATH_TO_EB_DOCKER_JSON_FILE=${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
-
-# Update docker image version. Commit and push change.
-
-jq --join-output --tab '.containerDefinitions[0].image = "'${DOCKER_ORG}'/'${DOCKER_IMAGE_NAME}':'${DOCKER_IMAGE_VERSION}'"' ${PATH_TO_EB_DOCKER_JSON_FILE} |sponge ${PATH_TO_EB_DOCKER_JSON_FILE}
-
-# Configure authentication bucket name
-
-jq '.authentication.bucket = "'${BUCKET_NAME}'"' ${PATH_TO_EB_DOCKER_JSON_FILE}|sponge ${PATH_TO_EB_DOCKER_JSON_FILE}
-
-# Configure docker image
-
-jq '.containerDefinitions[0].image = "'${DOCKER_ORG}'/'${DOCKER_IMAGE_NAME}':'${DOCKER_IMAGE_VERSION}'"' ${PATH_TO_EB_DOCKER_JSON_FILE}|sponge ${PATH_TO_EB_DOCKER_JSON_FILE}
-
-# Configure container image
-
-jq '.containerDefinitions[0].name = "'${APPLICATION_NAME}'"' ${PATH_TO_EB_DOCKER_JSON_FILE}|sponge ${PATH_TO_EB_DOCKER_JSON_FILE}
-
-
-## Update .elasticbeanstalk/config.yml
+cd ${DEPLOYMENT_REPO_DIR}
 
 # Configure global application name
 
 cat ${DEPLOYMENT_REPO_DIR}/.elasticbeanstalk/config.yml | docker run -i --rm jlordiales/jyparser set ".global.application_name" \"${APPLICATION_NAME}\"
 
+# Update docker image version. Commit and push change.
 
-# Add changed files
+jq --join-output --tab '.containerDefinitions[0].image = "'${DOCKER_ORG}'/'${DOCKER_IMAGE_NAME}':'${DOCKER_IMAGE_VERSION}'"' ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json|sponge ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
 
-cd ${DEPLOYMENT_REPO_DIR}
-
-git add ${PATH_TO_EB_DOCKER_JSON_FILE}
-git add ${DEPLOYMENT_REPO_DIR}/.elasticbeanstalk/config.yml
-
-# Commit
+git add ${DEPLOYMENT_REPO_DIR}/Dockerrun.aws.json
 
 git commit -m "${COMMIT_MESSAGE_PREFIX} DOCKER_IMAGE_VERSION: ${DOCKER_IMAGE_VERSION}. Trigger TRAVIS_COMMIT: ${TRAVIS_COMMIT}. TRAVIS_BUILD_ID=${TRAVIS_BUILD_ID}"
-
-
-# Push
 
 git push

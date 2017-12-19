@@ -4,13 +4,17 @@ set -euo pipefail
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-while getopts ":n:e:d:i:g:c:" OPT; do
+while getopts ":n:e:o:r:b:i:g:c:" OPT; do
   case ${OPT} in
     n) APPLICATION_NAME="${OPTARG}"
     ;;
     e) ENVIRONMENT_SUFFIXES="${OPTARG}"
     ;;
-    d) PATH_TO_DEPLOYMENT_ARTIFACTS_REPO="${OPTARG}"
+    o) DEPLOYMENT_ARTIFACTS_ORG="${OPTARG}"
+    ;;
+    r) DEPLOYMENT_ARTIFACTS_REPO="${OPTARG}"
+    ;;
+    b) DEPLOYMENT_ARTIFACTS_BRANCH="${OPTARG}"
     ;;
     i) INSTANCE_TYPE="${OPTARG}"
     ;;
@@ -32,7 +36,9 @@ for ENVIRONMENT_SUFFIX in ${ENVIRONMENT_SUFFIXES}; do
   ${DIR}/create_eb_environment.sh \
 	-n ${APPLICATION_NAME} \
 	-e ${ENVIRONMENT_SUFFIX} \
-	-d ${PATH_TO_DEPLOYMENT_ARTIFACTS_REPO} \
+	-o ${DEPLOYMENT_ARTIFACTS_ORG} \
+	-r ${DEPLOYMENT_ARTIFACTS_REPO} \
+	-b ${DEPLOYMENT_ARTIFACTS_BRANCH} \
 	-i ${INSTANCE_TYPE} \
 	-g ${REGION} \
 	-c ${CONFIG_DIR}
