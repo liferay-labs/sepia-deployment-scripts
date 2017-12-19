@@ -61,8 +61,7 @@ prereqs/codebuild/create_codebuild_projects.sh \
 	-n ${APPLICATION_NAME} \
 	-e ${ENVIRONMENT_SUFFIXES} \
 	-s ${CODEBUILD_SERVICE_ROLE_ARN} \
-	-c ${CONFIG_DIR} \
-	-r ${REGION}
+	-c ${CONFIG_DIR}
 
 codepipeline/create_deployment_pipeline.sh \
 	-c ${CONFIG_DIR} \
