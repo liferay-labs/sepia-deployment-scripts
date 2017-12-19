@@ -29,13 +29,8 @@ sure you set the following environment variables (keep them not visible):
 | DOCKER_USER           | Your Dockerhub user                                         |
 | DOCKER_PWD            | Your Dockerhub password                                     |
 | DOCKER_AUTH_TOKEN     | Your Docker Auth Token                                      |
-| GITHUB_TOKEN          | A Github personal access token with repo access to your liferay-game-deployment repository |
+| GITHUB_TOKEN          | The Github token of your liferay-game-deployment repository |
 | GITHUB_USER           | The Github user of your liferay-game-deployment repository  |
-
-To obtain the value for DOCKER_AUTH_TOKEN follow the steps described in [Using Images from a Private Repository](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker.container.console.html#docker-images-private).
-The value you need to enter is referred on that link as `auth_token`.
-
-To obtain the value for `GIHUB_TOKEN` follow these steps: [Creating a token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/#creating-a-token).
 
 ## Creating and updating the pipeline
 
