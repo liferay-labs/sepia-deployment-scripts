@@ -20,6 +20,9 @@ set +o allexport
 
 set -x
 
+prereqs/eb/update_eb_environment_specification.sh \
+	-c ${CONFIG_DIR}
+
 prereqs/s3/update_docker_config_auth_token.sh \
 	-c ${CONFIG_DIR}
 

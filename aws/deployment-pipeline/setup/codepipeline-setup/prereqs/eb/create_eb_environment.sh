@@ -4,13 +4,25 @@ set -euo pipefail
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-while getopts ":n:e:d:i:g:c:" opt; do
+function cleanup {
+  echo "Cleanup create_eb_environment temp files"
+  rm -r ${EB_TEMP_DIR} || true
+  rm ${DIR}/deployment-artifacts.zip || true
+  rmdir ${DIR}/${DEPLOYMENT_ARTIFACTS_REPO}-${DEPLOYMENT_ARTIFACTS_BRANCH} || true
+}
+trap cleanup EXIT
+
+while getopts ":n:e:o:r:b:i:g:c:" opt; do
   case ${opt} in
     n) APPLICATION_NAME="${OPTARG}"
     ;;
     e) ENVIRONMENT_SUFFIX="${OPTARG}"
     ;;
-    d) PATH_TO_DEPLOYMENT_ARTIFACTS_REPO="${OPTARG}"
+    o) DEPLOYMENT_ARTIFACTS_ORG="${OPTARG}"
+    ;;
+    r) DEPLOYMENT_ARTIFACTS_REPO="${OPTARG}"
+    ;;
+    b) DEPLOYMENT_ARTIFACTS_BRANCH="${OPTARG}"
     ;;
     i) INSTANCE_TYPE="${OPTARG}"
     ;;
@@ -26,11 +38,31 @@ done
 
 set -x
 
-CNAME="${APPLICATION_NAME}-${ENVIRONMENT_SUFFIX}"
+echo "Cleanup existing deployment artifacts"
 
-echo "Make sure cname is available: ${CNAME}"
+EB_TEMP_DIR="${DIR}/eb_temp"
 
-${DIR}/wait_until_cname_is_available.sh -g ${REGION} -c ${CNAME}
+rm -r ${EB_TEMP_DIR} || true
+
+mkdir -p ${EB_TEMP_DIR}
+
+
+echo "Download and unzip deployment artifacts"
+
+DEPLOYMENT_ARTIFACTS_URL=https://github.com/${DEPLOYMENT_ARTIFACTS_ORG}/${DEPLOYMENT_ARTIFACTS_REPO}/archive/${DEPLOYMENT_ARTIFACTS_BRANCH}.zip
+
+wget ${DEPLOYMENT_ARTIFACTS_URL} -O ${DIR}/deployment-artifacts.zip
+
+unzip -o ${DIR}/deployment-artifacts.zip
+
+rm ${DIR}/deployment-artifacts.zip
+
+shopt -s dotglob # for considering dot files (turn on dot files)
+
+mv ${DEPLOYMENT_ARTIFACTS_REPO}-${DEPLOYMENT_ARTIFACTS_BRANCH}/* ${EB_TEMP_DIR}
+
+rmdir ${DEPLOYMENT_ARTIFACTS_REPO}-${DEPLOYMENT_ARTIFACTS_BRANCH}
+
 
 echo "Read environment variables for environment"
 
@@ -40,13 +72,13 @@ echo "EB_ENV_VARS: ${EB_ENV_VARS}"
 
 PREVIOUS_DIR=$(pwd)
 
-cd ${PATH_TO_DEPLOYMENT_ARTIFACTS_REPO}
+cd ${EB_TEMP_DIR}
 
-echo "Create eb environment from directory: ${PATH_TO_DEPLOYMENT_ARTIFACTS_REPO}"
+echo "Create eb environment from directory: ${EB_TEMP_DIR}"
 
 eb create \
 	--instance_type ${INSTANCE_TYPE} \
-	--cname ${CNAME} \
+	--cname ${APPLICATION_NAME}-${ENVIRONMENT_SUFFIX} \
 	--envvars "${EB_ENV_VARS}" \
 	--region ${REGION} \
 	${APPLICATION_NAME}-${ENVIRONMENT_SUFFIX} \

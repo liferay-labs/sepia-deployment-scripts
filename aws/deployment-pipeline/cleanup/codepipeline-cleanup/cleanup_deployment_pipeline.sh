@@ -31,24 +31,14 @@ prereqs/codebuild/delete_codebuild_projects.sh \
 
 prereqs/eb/delete_eb_environments.sh \
 	-n ${APPLICATION_NAME} \
-	-e ${ENVIRONMENT_SUFFIXES} \
-	-r ${REGION}
-
-prereqs/iam/delete_role_policy.sh \
-	-r ${CODEPIPELINE_SERVICE_ROLE_NAME} \
-	-p ${CODEPIPELINE_SERVICE_ROLE_POLICY}
+	-e ${ENVIRONMENT_SUFFIXES}
 
 prereqs/iam/delete_role_policy.sh \
 	-r ${CODEBUILD_SERVICE_ROLE_NAME} \
-	-p ${CODEBUILD_SERVICE_ROLE_POLICY}
+	-p ${CODEBUILD_SERVICE_ROLE_POLICY} \
 
 prereqs/iam/delete_role.sh \
-	-r ${CODEBUILD_SERVICE_ROLE_NAME}
-
-prereqs/iam/delete_role.sh \
-	-r ${CODEPIPELINE_SERVICE_ROLE_NAME}
+	-n ${APPLICATION_NAME}
 
 prereqs/s3/delete_bucket.sh \
 	-n ${BUCKET_NAME}
-
-echo "Cleanup Deployment Pipeline Completed!"
