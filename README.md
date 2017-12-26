@@ -72,3 +72,39 @@ Now perform any change in the code of the liferay-game and push it to your
 Github master branch. The same process is repeated, except for the generation of
 the delivery pipeline in AWS, which is skipped because it was created during the
 first build.
+
+## Creating and updating a cloudformation stack
+
+To create or update a stack just execute the command
+
+```
+cd aws/deployment-cloudformation/create-or-update-stack.sh -c CONFIG_DIR
+```
+
+where ```CONFIG_DIR``` is the absolute path to a directory that should follow the structure:
+
+```
+   - CONFIG_DIR
+     - params
+          *.json
+     - templates
+          template.json
+```
+
+where the json files allocated under the ```params``` should follow the [structure](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html):
+
+```
+[
+   {
+     "ParameterKey": "string",
+     "ParameterValue": "string",
+     "UsePreviousValue": true|false,
+     "ResolvedValue": "string"
+   }
+   ...
+ ]
+```
+
+A new stack will be created for every ```params/*.json``` file with the name ```stack-CONFIG_DIR_NAME-JSON_FILE_NAME``` and the content of the templates/template.json file.
+
+To know more about to how write a AWS stack, please read the [AWS Cloudformation documentation](https://aws.amazon.com/es/cloudformation/)
