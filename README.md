@@ -78,7 +78,7 @@ first build.
 To create or update a stack just execute the command
 
 ```
-cd aws/deployment-cloudformation/create-or-update-stack.sh -c CONFIG_DIR
+aws/deployment-cloudformation/create-or-update-stack.sh -c CONFIG_DIR
 ```
 
 where ```CONFIG_DIR``` is the absolute path to a directory that should follow the structure:
@@ -91,7 +91,8 @@ where ```CONFIG_DIR``` is the absolute path to a directory that should follow th
           template.json
 ```
 
-where the json files allocated under the ```params``` should follow the [structure](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html):
+where the json files located under the ```params``` directory should follow the
+ [structure](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html):
 
 ```
 [
@@ -107,4 +108,5 @@ where the json files allocated under the ```params``` should follow the [structu
 
 A new stack will be created for every ```params/*.json``` file with the name ```stack-CONFIG_DIR_NAME-JSON_FILE_NAME``` and the content of the templates/template.json file.
 
-To know more about to how write a AWS stack, please read the [AWS Cloudformation documentation](https://aws.amazon.com/es/cloudformation/)
+To know more about to how write a AWS stack, please read the
+ [AWS Cloudformation documentation](https://aws.amazon.com/es/cloudformation/)
