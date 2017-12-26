@@ -11,7 +11,7 @@ while getopts "c:r:" OPT; do
   case ${OPT} in
     c) CONFIG_DIR="${OPTARG}"
     ;;
-    r) PARAM_AWS_REGION="${OPTARG}"
+    r) REGION="${OPTARG}"
     ;;
     \?) echo "Invalid option -${OPTARG}" >&2
     exit 1
@@ -25,8 +25,8 @@ if [ -z "$CONFIG_DIR" ]; then
     usage
 fi
 
-if [ -z "$PARAM_AWS_REGION" ]; then
-    export PARAM_AWS_REGION=$AWS_REGION
+if [ -z "$REGION" ]; then
+    export REGION=$AWS_REGION
 fi
 
 stack_type=`basename $CONFIG_DIR`
@@ -40,7 +40,7 @@ for param in $CONFIG_DIR/params/*.json; do
 
   command="update-stack"
 
-  cloudformation_command="aws cloudformation describe-stacks --stack-name $stack_name --region $PARAM_AWS_REGION"
+  cloudformation_command="aws cloudformation describe-stacks --stack-name $stack_name --region $REGION"
 
   echo ""
   echo "Executing: $cloudformation_command"
@@ -55,7 +55,7 @@ for param in $CONFIG_DIR/params/*.json; do
     command="create-stack"
   fi
 
-  cloudformation_command="aws cloudformation $command  --stack-name $stack_name --template-body file://${CONFIG_DIR}/template/template.json --parameters file://${param} --region $PARAM_AWS_REGION"
+  cloudformation_command="aws cloudformation $command  --stack-name $stack_name --template-body file://${CONFIG_DIR}/template/template.json --parameters file://${param} --region $REGION"
 
   echo ""
   echo "Executing: $cloudformation_command"
