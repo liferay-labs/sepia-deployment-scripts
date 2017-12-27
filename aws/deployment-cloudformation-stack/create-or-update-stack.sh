@@ -71,7 +71,6 @@ for param in $CONFIG_DIR/params/*.json; do
      echo ""
      echo "The stack $stack_name won't be created/updated"
      echo ""
-     exit 0;
   fi
 
 done
