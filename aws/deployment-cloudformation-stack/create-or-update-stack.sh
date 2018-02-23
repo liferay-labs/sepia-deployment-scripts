@@ -61,7 +61,7 @@ for param in $CONFIG_DIR/params/*.json; do
   echo "Executing: $cloudformation_command"
   echo ""
 
- `$cloudformation_command`
+ ${cloudformation_command}
 
  if [ $? -eq 0 ]; then
      echo ""
