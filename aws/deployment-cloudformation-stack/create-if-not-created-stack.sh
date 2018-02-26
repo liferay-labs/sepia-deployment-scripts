@@ -38,8 +38,6 @@ for param in $CONFIG_DIR/params/*.json; do
 
   stack_name=stack-$stack_type-$env_name
 
-  command="update-stack"
-
   cloudformation_command="aws cloudformation describe-stacks --stack-name $stack_name --region $REGION"
 
   echo ""
@@ -49,19 +47,18 @@ for param in $CONFIG_DIR/params/*.json; do
   ${cloudformation_command}
 
   if [ $? -eq 0 ]; then
-     echo "Recreating stack $stack_name"
+     echo "The $stack_name is not going to be created, because it exists"
   else
     echo "First time that the stack $stack_name try to be created"
-    command="create-stack"
+
+    cloudformation_command="aws cloudformation $command  --stack-name $stack_name --template-body file://${CONFIG_DIR}/template/template.json --parameters file://${param} --region $REGION"
+
+    echo ""
+    echo "Executing: $cloudformation_command"
+    echo ""
+
+    ${cloudformation_command}
   fi
-
-  cloudformation_command="aws cloudformation $command  --stack-name $stack_name --template-body file://${CONFIG_DIR}/template/template.json --parameters file://${param} --region $REGION"
-
-  echo ""
-  echo "Executing: $cloudformation_command"
-  echo ""
-
-  ${cloudformation_command}
 
   if [ $? -eq 0 ]; then
     echo ""
@@ -69,7 +66,7 @@ for param in $CONFIG_DIR/params/*.json; do
     echo ""
   else
     echo ""
-    echo "The stack $stack_name won't be created/updated"
+    echo "The stack $stack_name won't be created"
     echo ""
   fi
 
