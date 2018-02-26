@@ -46,7 +46,7 @@ for param in $CONFIG_DIR/params/*.json; do
   echo "Executing: $cloudformation_command"
   echo ""
 
- ${cloudformation_command}
+  ${cloudformation_command}
 
   if [ $? -eq 0 ]; then
      echo "Recreating stack $stack_name"
@@ -61,16 +61,16 @@ for param in $CONFIG_DIR/params/*.json; do
   echo "Executing: $cloudformation_command"
   echo ""
 
- ${cloudformation_command}
+  ${cloudformation_command}
 
- if [ $? -eq 0 ]; then
-     echo ""
-     echo "Stack succesfully created/updated $stack_name"
-     echo ""
+  if [ $? -eq 0 ]; then
+    echo ""
+    echo "Stack succesfully created/updated $stack_name"
+    echo ""
   else
-     echo ""
-     echo "The stack $stack_name won't be created/updated"
-     echo ""
+    echo ""
+    echo "The stack $stack_name won't be created/updated"
+    echo ""
   fi
 
 done
