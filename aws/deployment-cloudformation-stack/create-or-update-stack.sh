@@ -55,7 +55,7 @@ for param in $CONFIG_DIR/params/*.json; do
     command="create-stack"
   fi
 
-  cloudformation_command="aws cloudformation $command  --stack-name $stack_name --template-body file://${CONFIG_DIR}/template/template.json --parameters file://${param} --region $REGION"
+  cloudformation_command="aws cloudformation $command  --stack-name $stack_name --template-body file://${CONFIG_DIR}/template/template.json --parameters file://${param} --region $REGION --capabilities CAPABILITY_IAM"
 
   echo ""
   echo "Executing: $cloudformation_command"
