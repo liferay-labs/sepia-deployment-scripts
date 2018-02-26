@@ -51,7 +51,7 @@ for param in $CONFIG_DIR/params/*.json; do
   else
     echo "First time that the stack $stack_name try to be created"
 
-    cloudformation_command="aws cloudformation $command  --stack-name $stack_name --template-body file://${CONFIG_DIR}/template/template.json --parameters file://${param} --region $REGION"
+    cloudformation_command="aws cloudformation create-stack --stack-name $stack_name --template-body file://${CONFIG_DIR}/template/template.json --parameters file://${param} --region $REGION"
 
     echo ""
     echo "Executing: $cloudformation_command"
