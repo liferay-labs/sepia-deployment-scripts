@@ -3,7 +3,7 @@
 function usage {
     echo "usage: $0 [-c configdir] [-r region]"
     echo "  -c configdir     specify the the config file that created the stack"
-    echo "  -r awsregion     (optional) AWS_REGION of the stack, if this param is empty, the env variable AWS_REGION will be used instead"
+    echo "  -r awsregion     (optional) AWS_DEFAULT_REGION of the stack, if this param is empty, the env variable AWS_DEFAULT:REGION will be used instead"
     exit 1
 }
 
@@ -26,7 +26,7 @@ if [ -z "$CONFIG_DIR" ]; then
 fi
 
 if [ -z "$REGION" ]; then
-    export REGION=$AWS_REGION
+    export REGION=$AWS_DEFAULT_REGION
 fi
 
 stack_type=`basename $CONFIG_DIR`
